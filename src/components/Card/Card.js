@@ -4,7 +4,7 @@ import { useLayoutEffect } from 'react';
 import { useState } from 'react';
 import style from './Card.module.css';
 
-export const Card = ({ title, description }) => {
+export const Card = ({ title, description, image, url }) => {
   const ref = useRef(null);
   const [x, setX] = useState();
   const [y, setY] = useState();
@@ -42,8 +42,8 @@ export const Card = ({ title, description }) => {
   }, []);
 
   const handleMouseMove = (e) => {
-    setMouseX(e.clientX - x - width / 2);
-    setMouseY(e.clientY - y - height / 2);
+    setMouseX(e.clientX - x - width / 2 - 150);
+    setMouseY(e.clientY - y - height / 2 - 150);
   };
 
   const handleMouseEnter = () => {
@@ -59,12 +59,17 @@ export const Card = ({ title, description }) => {
     );
   };
 
+  const handleClick = () => {
+    window.open(url);
+  };
+
   return (
     <div
       className={style.cardWrap}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       ref={ref}>
       <div
         style={{
@@ -73,12 +78,17 @@ export const Card = ({ title, description }) => {
         className={style.card}>
         <div
           style={{
+            backgroundImage: `url(${image})`,
             transform: `translateX(${tX}px) translateY(${tY}px)`
           }}
           className={style.cardBg}></div>
         <div className={style.cardInfo}>
           <h1 slot="header">{title}</h1>
-          <p slot="content">{description}</p>
+          <p slot="content">
+            {description}
+            {'\n'}
+            <span>{"Note!: if app doesn't work try to reboot page"}</span>
+          </p>
         </div>
       </div>
     </div>
