@@ -22,7 +22,7 @@ const App = () => {
     },
     {
       id: 2,
-      url: 'https://linkedid-copy.herokuapp.com/',
+      url: 'https://linkedin-copy.herokuapp.com/',
       title: 'LinkedIn copy',
       description: 'Copy of linkedIn with posts, users and much more',
       image: linkedInImage,
